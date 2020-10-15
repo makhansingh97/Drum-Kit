@@ -8,7 +8,8 @@ var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 for (var i = 0; i < numberOfDrumButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     // var buttonInnerHTML = this.innerHTML;
-    makeSound(this.innerHTML);
+    makeSound(this.innerHTML); // calling makeSound
+    buttonAnimation(this.innerHTML); // calling buttonAnimation
   });
 }
 
@@ -16,6 +17,7 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
 
 document.addEventListener("keypress", function (event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 // funcition to make sound based on key passed
@@ -56,4 +58,18 @@ function makeSound(key) {
       console.log(buttonInnerHTML);
       break;
   }
+}
+
+// function to add animations
+
+function buttonAnimation(currentKey) {
+  // there is a class .pressed in css we want to add that to the button passed
+  var activeButton = document.querySelector("." + currentKey); // we get the innner html of particular key pressed
+  // add the class .pressed
+  activeButton.classList.add("pressed"); // animation class added
+
+  // remove that class after some time let's say 100 ms , so it looks like animation
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
